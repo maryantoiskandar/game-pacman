@@ -1,0 +1,236 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+h1 {
+  color: yellow;
+  text-shadow: 0px 0px 10px rgba(255, 255, 0, 0.7);
+  margin-bottom: 20px;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(21, 20px);
+  grid-template-rows: repeat(21, 20px); /* Diubah dari 31 menjadi 21 untuk bentuk persegi */
+  gap: 0;
+  border: 2px solid blue;
+  background-color: black;
+  width: fit-content;
+  margin: 0 auto;
+} 
+
+.cell {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wall {
+  background-color: blue;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+}
+.power-pellet {
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 2px;
+  animation: pulse 1s infinite  alternate;
+}
+
+@keyframes pulse {
+from {opacity: 1;}
+to {opacity: 0.3;}
+
+}
+
+.pacman {
+  width: 16px;
+  height: 16px;
+  background-color: yellow;
+  border-radius: 50%;
+  margin: 2px;
+}
+
+.pacman::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-right: 8px solid yellow;
+  transform: rotate(45deg);
+  top : 0px;
+  left: 0px;
+}
+
+.pacman.right::before {
+  transform: rotate(0);
+}
+
+.pacman.down::before {
+  transform: rotate(90deg);
+}
+
+.pacman.left::before {
+  transform: rotate(180deg);
+}
+
+.ghost {
+  width: 16px;
+  height: 16px;
+  border-radius: 50% 50% 0 0;
+  margin: 2px;
+}
+
+.ghost::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+}
+
+.ghost::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 8px;
+  background-color: inherit;
+  border-radius: 0 0 50% 50%;
+  bottom: 0;
+  left: 0;
+}
+
+.blinky {
+  background-color: red;
+}
+.pinky {
+  background-color: pink;
+}
+.inky {
+  background-color: cyan;
+}
+.clyde {
+  background-color: orange;
+}
+
+.scared {
+  background-color: blue !important;
+  animation: scared-animation 0.5s infinite alternate;
+
+}
+
+@keyframes scared-animation {
+  from {opacity: 1;}
+  to {opacity: 0.7;}
+}
+.control {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: yellow;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #ffcc00;
+  transform: scale(1.05);
+}
+
+.instructions {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ccc;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.game-over, .game-won {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 30px;
+  border: 2px solid yellow;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 100;
+  display: none;
+}
+
+.game-over h2, .game-won h2 {
+  color: yellow;
+  margin-bottom: 15px;
+}
+
+.game-won h2 {
+  color: lime;
+}
+
+.volume-control {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.volume-control label {
+  font-size: 14px;
+}
